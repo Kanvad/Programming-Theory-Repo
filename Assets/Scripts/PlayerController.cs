@@ -8,20 +8,27 @@ public class PlayerController : MonoBehaviour
     float speed = 5.0f;
     float rangeLimit = 2.0f;
     float horizontalInput;
-    GameManager gameManager;
+    // GameManager gameManager;
+    public bool isGameActive = true;
     
     // Start is called before the first frame update
     void Start()
     {
         // gameObject = GetComponent<Rigidbody>();
-        gameManager  = gameObject.AddComponent<GameManager>();
+        // gameManager  = gameObject.AddComponent<GameManager>();
+        // isGameActive = true;
+        // OnGame();
+        Debug.Log(isGameActive);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        if (isGameActive) {
+            MovePlayer();
+        }
+        
     }
 
     private void MovePlayer() {
@@ -37,9 +44,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // public void OnGame() {
+    //     isGameActive = true;
+    // }
+
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Enemy")) {
-            gameManager.isGameActive = false;
+        if (other.CompareTag("Block")) {
+            isGameActive = false;
+            Debug.Log("Game over");
         }
     }
+
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag("Block")) {
+            isGameActive = false;
+            Debug.Log("Game over");
+        }
+    }    
 }

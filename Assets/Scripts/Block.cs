@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    float speed = 3.0f;
+    float speed = 5.0f;
     // float rotateSpeed = 20.0f;
+    // GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
