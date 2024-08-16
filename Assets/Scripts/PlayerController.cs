@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Rigidbody gameObject;
     float speed = 5.0f;
     float rangeLimit = 2.0f;
     float horizontalInput;
-    // GameManager gameManager;
     public bool isGameActive = true;
-    
-    // Start is called before the first frame update
+    public Material[] colors;
+
+
+
     void Start()
     {
-        // gameObject = GetComponent<Rigidbody>();
-        // gameManager  = gameObject.AddComponent<GameManager>();
-        // isGameActive = true;
-        // OnGame();
-        Debug.Log(isGameActive);
+
+        int colorIndex = PlayerPrefs.GetInt("Color");
+        // Debug.Log("Color " + colorIndex);
+        gameObject.GetComponent<Renderer>().material = colors[colorIndex];
+        // Debug.Log(isGameActive);
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isGameActive) {
@@ -44,21 +43,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // public void OnGame() {
-    //     isGameActive = true;
-    // }
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Block")) {
             isGameActive = false;
-            Debug.Log("Game over");
+            // Debug.Log("Game over");
         }
     }
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Block")) {
             isGameActive = false;
-            Debug.Log("Game over");
+            // Debug.Log("Game over");
         }
     }    
 }
